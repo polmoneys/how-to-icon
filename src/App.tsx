@@ -4,25 +4,38 @@ import Icon from "./Icon";
 
 export default function App() {
   return (
-    <div className="App">
-      <Icon name="plus" disabled />
+    <section className="App">
+      <h1> Icons </h1>
 
-      <Icon name="cross" />
+      <h3> Sizes and strokeWidth </h3>
 
-      <Icon name="minus" />
-      <Icon name="plus" />
+      <div className="row">
+        <Icon name="cross" />
+        <Icon name="minus" />
+        <Icon name="plus" />
+        <Icon name="cross" size={24} />
+        <Icon name="minus" size={24} />
+        <Icon name="plus" size={24} />
+      </div>
+      <h3>Fill and stroke color </h3>
 
-      <Icon name="cross" variant="filled" />
+      <div className="row">
+        <Icon name="cross" variant="filled" stroke="white" />
+        <Icon name="minus" variant="filled" fill="gray" stroke="white" />
+        <Icon name="plus" variant="filled" fill="green" stroke="white" />
+      </div>
+      <div className="row">
+        <Icon name="cross" variant="outline" stroke="orangered" />
+        <Icon name="minus" variant="outline" stroke="gray" />
+        <Icon name="plus" variant="outline" stroke="green" />
+      </div>
+      <h3>Disabled styles </h3>
 
-      <Icon name="minus" variant="filled" />
-      <Icon name="plus" variant="filled" />
-
-      <Icon name="plus" variant="filled" disabled />
-
-      <Icon name="cross" variant="outline" />
-      <Icon name="minus" variant="outline" />
-      <Icon name="plus" variant="outline" />
-      <Icon name="plus" variant="outline" disabled />
-    </div>
+      <div className="row">
+        <Icon name="plus" disabled />
+        <Icon name="plus" variant="filled" disabled />
+        <Icon name="plus" variant="outline" disabled />
+      </div>
+    </section>
   );
 }

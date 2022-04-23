@@ -1,8 +1,20 @@
 .App {
   font-family: sans-serif;
-  text-align: center;
   padding: 2vh;
+}
+
+h1 {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.App > * + * {
+  margin-bottom: 2rem;
+}
+
+.row {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  align-items: center;
 }
