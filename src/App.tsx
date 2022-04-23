@@ -13,9 +13,9 @@ export default function App() {
         <Icon name="cross" />
         <Icon name="minus" />
         <Icon name="plus" />
-        <Icon name="cross" size={24} />
-        <Icon name="minus" size={24} />
-        <Icon name="plus" size={24} />
+        <Icon name="cross" size={24} stroke="orangered" />
+        <Icon name="minus" size={24} stroke="gray" />
+        <Icon name="plus" size={24} stroke="green" />
       </div>
       <h3>Fill and stroke color </h3>
 
@@ -35,6 +35,7 @@ export default function App() {
         <Icon name="plus" disabled />
         <Icon name="plus" variant="filled" disabled />
         <Icon name="plus" variant="outline" disabled />
+        <Icon name="plus" variant="outline" disabled disabledOpacity={1} />
       </div>
     </section>
   );

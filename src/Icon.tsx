@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 import { FiPlus, FiMinus, FiX } from "react-icons/fi";
 
 interface Props {
@@ -6,6 +6,7 @@ interface Props {
   variant?: "outline" | "filled";
   name: "plus" | "minus" | "cross";
   size?: number;
+  gap?: number;
   fill?: string;
   stroke?: string;
   disabledStroke?: string;
@@ -19,6 +20,7 @@ const Icon = (props: Props) => {
     disabled,
     variant,
     size = 42,
+    gap = 2,
     fill = "orangered",
     stroke = "currentColor",
     strokeWidth = 2,
@@ -28,29 +30,30 @@ const Icon = (props: Props) => {
 
   const isVariant = variant !== undefined;
   const isFilled = isVariant && variant === "filled";
-  const WHITESPACE = 4;
-  const RATIO = size - WHITESPACE;
-  const OPACITY = disabled ? disabledOpacity : 1;
+  const finalSize = size - gap;
+  const finalOpacity = disabled ? disabledOpacity : 1;
+  const disabledOffset = 6;
+  const disabledStrokeWidth = strokeWidth * 0.9;
+  const disabledStrokeOpacity = 0.9;
 
-  const styles = {
-    svg: {
-      verticalAlign: "middle",
-      overflow: "hidden",
-      outline: isVariant
-        ? `${strokeWidth + 1}px solid ${isFilled ? fill : stroke}`
-        : "transparent",
-      borderRadius: "50%",
-      aspectRatio: "1",
-      backgroundColor: isFilled ? fill : "transparent",
-      stroke,
-      strokeWidth,
-      opacity: OPACITY
-    }
-  };
+  const styles = useMemo(() => {
+    return {
+      svg: {
+        verticalAlign: "middle",
+        overflow: disabled ? "auto" : "hidden",
+        outline: isVariant
+          ? `${strokeWidth + 1}px solid ${isFilled ? fill : stroke}`
+          : "transparent",
+        borderRadius: "50%",
+        aspectRatio: "1",
+        backgroundColor: isFilled ? fill : "transparent",
+        stroke,
+        strokeWidth,
+        opacity: finalOpacity
+      }
+    };
+  }, [disabled, isVariant, strokeWidth, isFilled, fill, stroke, finalOpacity]);
 
-  /*
-  -webkit-text-stroke-color: currentColor;
-*/
   return (
     <svg
       style={styles.svg}
@@ -64,7 +67,7 @@ const Icon = (props: Props) => {
           plus: (
             <FiPlus
               size={size}
-              opacity={OPACITY}
+              opacity={finalOpacity}
               stroke={stroke}
               strokeWidth={strokeWidth}
             />
@@ -72,7 +75,7 @@ const Icon = (props: Props) => {
           minus: (
             <FiMinus
               size={size}
-              opacity={OPACITY}
+              opacity={finalOpacity}
               stroke={stroke}
               strokeWidth={strokeWidth}
             />
@@ -80,7 +83,7 @@ const Icon = (props: Props) => {
           cross: (
             <FiX
               size={size}
-              opacity={OPACITY}
+              opacity={finalOpacity}
               stroke={stroke}
               strokeWidth={strokeWidth}
             />
@@ -90,11 +93,34 @@ const Icon = (props: Props) => {
       {disabled && (
         <g>
           <line
-            x1={WHITESPACE}
-            y1={RATIO}
-            x2={RATIO}
-            y2={WHITESPACE}
-            strokeWidth={strokeWidth * 4}
+            x1={gap}
+            x2={finalSize}
+            y1={finalSize - disabledOffset}
+            y2={gap - disabledOffset}
+            strokeWidth={disabledStrokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            stroke={disabledStroke}
+            opacity={disabledStrokeOpacity}
+          />
+          <line
+            x1={gap}
+            x2={finalSize}
+            y1={finalSize + disabledOffset}
+            y2={gap + disabledOffset}
+            strokeWidth={disabledStrokeWidth}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            stroke={disabledStroke}
+            opacity={disabledStrokeOpacity}
+          />
+
+          <line
+            x1={gap}
+            y1={finalSize}
+            x2={finalSize}
+            y2={gap}
+            strokeWidth={disabledStroke}
             strokeLinecap="round"
             strokeLinejoin="round"
             stroke={disabledStroke}
