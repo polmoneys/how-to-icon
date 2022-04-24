@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { FiPlus, FiMinus, FiX } from "react-icons/fi";
+import { FiPlus, FiMinus, FiX, FiCheck } from "react-icons/fi";
 
 interface Props {
   disabled?: boolean;
   variant?: "outline" | "filled";
-  name: "plus" | "minus" | "cross";
+  name: "plus" | "minus" | "cross" | "check";
   size?: number;
   gap?: number;
   fill?: string;
@@ -35,15 +35,17 @@ const Icon = (props: Props) => {
   const disabledOffset = 6;
   const disabledStrokeWidth = strokeWidth * 0.9;
   const disabledStrokeOpacity = 0.9;
+  const finalViewBox = useMemo(() => {
+    return `0 ${name === "check" ? -2 : 0} ${size} ${size}`;
+  }, [size, name]);
 
   const styles = useMemo(() => {
     return {
       svg: {
-        verticalAlign: "middle",
-        overflow: disabled ? "auto" : "hidden",
         outline: isVariant
           ? `${strokeWidth + 1}px solid ${isFilled ? fill : stroke}`
           : "transparent",
+        outlineOffset: "-0.5px",
         borderRadius: "50%",
         aspectRatio: "1",
         backgroundColor: isFilled ? fill : "transparent",
@@ -52,14 +54,14 @@ const Icon = (props: Props) => {
         opacity: finalOpacity
       }
     };
-  }, [disabled, isVariant, strokeWidth, isFilled, fill, stroke, finalOpacity]);
+  }, [isVariant, strokeWidth, isFilled, fill, stroke, finalOpacity]);
 
   return (
     <svg
       style={styles.svg}
       width={size}
       height={size}
-      viewBox={`0 0  ${size} ${size}`}
+      viewBox={finalViewBox}
       focusable="false"
     >
       {
@@ -82,6 +84,14 @@ const Icon = (props: Props) => {
           ),
           cross: (
             <FiX
+              size={size}
+              opacity={finalOpacity}
+              stroke={stroke}
+              strokeWidth={strokeWidth}
+            />
+          ),
+          check: (
+            <FiCheck
               size={size}
               opacity={finalOpacity}
               stroke={stroke}

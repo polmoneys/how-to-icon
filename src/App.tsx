@@ -10,24 +10,57 @@ export default function App() {
       <h3> Sizes and strokeWidth </h3>
 
       <div className="row">
+        <Icon name="check" />
         <Icon name="cross" />
         <Icon name="minus" />
         <Icon name="plus" />
-        <Icon name="cross" size={24} stroke="orangered" />
-        <Icon name="minus" size={24} stroke="gray" />
-        <Icon name="plus" size={24} stroke="green" />
+      </div>
+      <div className="row">
+        <Icon name="check" size={24} stroke="var(--accent-2)" />
+        <Icon name="cross" size={24} stroke="var(--accent-3)" />
+        <Icon name="minus" size={24} stroke="var(--gray-4)" />
+        <Icon name="plus" size={24} stroke="var(--accent-1)" />
+      </div>
+      <div className="row">
+        <Icon name="check" strokeWidth={4} stroke="var(--accent-2)" />
+        <Icon name="cross" strokeWidth={4} stroke="var(--accent-3)" />
+        <Icon name="minus" strokeWidth={4} stroke="var(--gray-4)" />
+        <Icon name="plus" strokeWidth={4} stroke="var(--accent-1)" />
       </div>
       <h3>Fill and stroke color </h3>
 
       <div className="row">
-        <Icon name="cross" variant="filled" stroke="white" />
-        <Icon name="minus" variant="filled" fill="gray" stroke="white" />
-        <Icon name="plus" variant="filled" fill="green" stroke="white" />
+        <Icon
+          name="check"
+          variant="filled"
+          fill="var(--accent-2)"
+          stroke="var(--gray-8)"
+        />
+        <Icon
+          name="cross"
+          variant="filled"
+          fill="var(--accent-3)"
+          stroke="var(--gray-8)"
+        />
+        <Icon
+          name="minus"
+          variant="filled"
+          fill="var(--gray-4)"
+          stroke="var(--gray-8)"
+        />
+        <Icon
+          name="plus"
+          variant="filled"
+          fill="var(--accent-1)"
+          stroke="var(--gray-8)"
+        />
       </div>
       <div className="row">
-        <Icon name="cross" variant="outline" stroke="orangered" />
-        <Icon name="minus" variant="outline" stroke="gray" />
-        <Icon name="plus" variant="outline" stroke="green" />
+        <Icon name="check" variant="outline" stroke="var(--accent-2)" />
+
+        <Icon name="cross" variant="outline" stroke="var(--accent-3)" />
+        <Icon name="minus" variant="outline" stroke="var(--gray-4)" />
+        <Icon name="plus" variant="outline" stroke="var(--accent-1)" />
       </div>
       <h3>Disabled styles </h3>
 
